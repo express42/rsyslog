@@ -46,12 +46,44 @@ execute "remove default logging rules" do
   command "rm -rf /etc/rsyslog.d/*"
 end
 
-rsyslog_rule "postfix" do
-  selector "mail.*"
-  log_action "/var/log/mail.log"
+rsyslog_rule "auth" do
+  priority 10
+  selector "auth,authpriv.*"
+  log_action "/var/log/auth.log"
 end
 
-rsyslog_rule "remote" do
-  selector "*.*"
-  log_action "@10.0.2.2"
+rsyslog_rule "negauth" do
+  priority 10
+  selector "*.*;auth,authpriv.none"
+  log_action "-/var/log/syslog"
+end
+
+rsyslog_rule "kernel" do
+  priority 10
+  selector "kern.*"
+  log_action "-/var/log/kern.log"
+end
+
+rsyslog_rule "mail" do
+  priority 15
+  selector "mail.*"
+  log_action "-/var/log/mail.log"
+end
+
+rsyslog_rule "mail-error" do
+  priority 15
+  selector "mail.err"
+  log_action "/var/log/mail.err"
+end
+
+rsyslog_rule "emergency" do
+  priority 10
+  selector "*.emerg"
+  log_action ":omusrmsg:*"
+end
+
+rsyslog_rule "console" do
+  priority 10
+  selector "daemon.*;mail.*;news.err;*.=debug;*.=info;*.=notice;*.=warn"
+  log_action "|/dev/xconsole"
 end
