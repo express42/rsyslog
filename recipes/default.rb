@@ -42,8 +42,9 @@ template "/etc/rsyslog.conf" do
   notifies :restart, "service[rsyslog]"
 end
 
+# This this temporary section, we hope to make default rules more complex in future
 execute "remove default logging rules" do
-  command "rm -rf /etc/rsyslog.d/*"
+  command "rm -rf /etc/rsyslog.d/50-default.conf"
 end
 
 rsyslog_rule "auth" do
