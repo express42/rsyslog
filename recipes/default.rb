@@ -83,8 +83,3 @@ rsyslog_rule "emergency" do
   log_action ":omusrmsg:*"
 end
 
-rsyslog_rule "console" do
-  priority 10
-  selector "daemon.*;mail.*;news.err;*.=debug;*.=info;*.=notice;*.=warn"
-  log_action "|/dev/xconsole"
-end
