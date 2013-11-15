@@ -4,6 +4,7 @@
 # Modules 
 default['rsyslog']['modules']['default_modules'] = ["imuxsock", "imklog"]
 default['rsyslog']['modules']['extra_modules'] = []
+default['rsyslog']['preservefqdn'] = "off"
 
 # Global
 default['rsyslog']['global']['ActionFileDefaultTemplate'] = "RSYSLOG_TraditionalFileFormat"

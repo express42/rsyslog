@@ -32,12 +32,14 @@ service 'rsyslog' do
 end
 
 modules = (node['rsyslog']['modules']['default_modules'] + node['rsyslog']['modules']['extra_modules']).uniq
+preservefqdn = node['rsyslog']['preservefqdn']
 
 template "/etc/rsyslog.conf" do
   source "rsyslog.conf.erb"
   variables(
     :modules => modules,
-    :global => node['rsyslog']['global']
+    :global => node['rsyslog']['global'],
+    :preservefqdn => preservefqdn
   )
   notifies :restart, "service[rsyslog]"
 end
