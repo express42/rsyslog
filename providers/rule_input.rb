@@ -52,4 +52,6 @@ action :rule_input do
     cookbook 'rsyslog'
     notifies :restart, 'service[rsyslog]', :delayed
   end
+
+  new_resource.updated_by_last_action(true)
 end
