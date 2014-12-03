@@ -1,16 +1,12 @@
 # Description
 
-Installs and configures rsyslog
+Installs and configures rsyslog. Provides LWRP for creating rules.
 
 # Requirements
 
 ## Platform:
 
 * Ubuntu
-
-## Cookbooks:
-
-*No dependencies defined*
 
 # Attributes
 

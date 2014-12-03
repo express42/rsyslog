@@ -2,7 +2,7 @@ name             'rsyslog'
 maintainer       'LLC Express 42'
 maintainer_email 'info@express42.com'
 license          'MIT'
-description      'Installs and configures rsyslog'
+description      'Installs and configures rsyslog. Provides LWRP for creating rules.'
 version          '0.0.5'
 
 recipe            'rssylog::default', 'Installs and configures rsyslog'
