@@ -24,7 +24,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-package "rsyslog"
+package 'rsyslog'
 
 service 'rsyslog' do
   case node['platform']
@@ -33,61 +33,60 @@ service 'rsyslog' do
       provider Chef::Provider::Service::Upstart
     end
   end
-  supports :restart => true
+  supports restart: true
   action [:enable, :start]
 end
 
 modules = (node['rsyslog']['modules']['default_modules'] + node['rsyslog']['modules']['extra_modules']).uniq
 preservefqdn = node['rsyslog']['preservefqdn']
 
-template "/etc/rsyslog.conf" do
-  source "rsyslog.conf.erb"
+template '/etc/rsyslog.conf' do
+  source 'rsyslog.conf.erb'
   variables(
-    :modules => modules,
-    :global => node['rsyslog']['global'],
-    :preservefqdn => preservefqdn
+    modules: modules,
+    global: node['rsyslog']['global'],
+    preservefqdn: preservefqdn
   )
-  notifies :restart, "service[rsyslog]"
+  notifies :restart, 'service[rsyslog]'
 end
 
 # This this temporary section, we hope to make default rules more complex in future
-execute "remove default logging rules" do
-  command "rm -rf /etc/rsyslog.d/50-default.conf"
+execute 'remove default logging rules' do
+  command 'rm -rf /etc/rsyslog.d/50-default.conf'
 end
 
-rsyslog_rule "auth" do
+rsyslog_rule 'auth' do
   priority 10
-  selector "auth,authpriv.*"
-  log_action "/var/log/auth.log"
+  selector 'auth,authpriv.*'
+  log_action '/var/log/auth.log'
 end
 
-rsyslog_rule "negauth" do
+rsyslog_rule 'negauth' do
   priority 10
-  selector "*.*;auth,authpriv.none"
-  log_action "-/var/log/syslog"
+  selector '*.*;auth,authpriv.none'
+  log_action '-/var/log/syslog'
 end
 
-rsyslog_rule "kernel" do
+rsyslog_rule 'kernel' do
   priority 10
-  selector "kern.*"
-  log_action "-/var/log/kern.log"
+  selector 'kern.*'
+  log_action '-/var/log/kern.log'
 end
 
-rsyslog_rule "mail" do
+rsyslog_rule 'mail' do
   priority 15
-  selector "mail.*"
-  log_action "-/var/log/mail.log"
+  selector 'mail.*'
+  log_action '-/var/log/mail.log'
 end
 
-rsyslog_rule "mail-error" do
+rsyslog_rule 'mail-error' do
   priority 15
-  selector "mail.err"
-  log_action "/var/log/mail.err"
+  selector 'mail.err'
+  log_action '/var/log/mail.err'
 end
 
-rsyslog_rule "emergency" do
+rsyslog_rule 'emergency' do
   priority 10
-  selector "*.emerg"
-  log_action ":omusrmsg:*"
+  selector '*.emerg'
+  log_action ':omusrmsg:*'
 end
-

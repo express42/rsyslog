@@ -25,7 +25,7 @@
 actions :rule
 default_action :rule
 
-attribute :name, :kind_of => String, :name_attribute => true
-attribute :selector, :kind_of => String, :required => true
-attribute :log_action, :kind_of => String, :required => true
-attribute :priority, :kind_of => Integer, :default => 20
+attribute :name, kind_of: String, name_attribute: true
+attribute :selector, kind_of: String, required: true
+attribute :log_action, kind_of: String, required: true
+attribute :priority, kind_of: Integer, default: 20

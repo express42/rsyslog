@@ -37,19 +37,19 @@ action :rule_input do
   persist_interval = new_resource.persist_interval
 
   template "/etc/rsyslog.d/#{priority}-#{rule_name}.conf" do
-    source "rule-input.conf.erb"
-    owner "root"
-    group "root"
-    mode 0644
+    source 'rule-input.conf.erb'
+    owner 'root'
+    group 'root'
+    mode '0644'
     variables(
-      :filename => filename,
-      :state_file => state_file,
-      :severity => severity,
-      :facility => facility,
-      :persist_interval => persist_interval,
-      :tag => tag
+      filename: filename,
+      state_file: state_file,
+      severity: severity,
+      facility: facility,
+      persist_interval: persist_interval,
+      tag: tag
     )
-    cookbook "rsyslog"
-    notifies :restart, "service[rsyslog]", :delayed
+    cookbook 'rsyslog'
+    notifies :restart, 'service[rsyslog]', :delayed
   end
 end

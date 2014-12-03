@@ -26,22 +26,22 @@
 #
 
 action :rule do
-  
+
   rule_name = new_resource.name
   priority = new_resource.priority
   selector = new_resource.selector
   log_action = new_resource.log_action
-  
+
   template "/etc/rsyslog.d/#{priority}-#{rule_name}.conf" do
-    source "rule.conf.erb"
-    owner "root"
-    group "root"
-    mode 0644
-    variables( 
-      :selector => selector,
-      :log_action => log_action
+    source 'rule.conf.erb'
+    owner 'root'
+    group 'root'
+    mode '0644'
+    variables(
+      selector: selector,
+      log_action: log_action
     )
-    cookbook "rsyslog"
-    notifies :restart, "service[rsyslog]", :delayed
+    cookbook 'rsyslog'
+    notifies :restart, 'service[rsyslog]', :delayed
   end
 end

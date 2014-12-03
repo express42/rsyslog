@@ -25,9 +25,9 @@
 actions :rule_input
 default_action :rule_input
 
-attribute :name, :kind_of => String, :name_attribute => true
-attribute :priority, :kind_of => Integer, :default => 20
-attribute :filename, :kind_of => String, :default => nil
-attribute :severity, :kind_of => String, :default => "Info"
-attribute :facility, :kind_of => String, :default => "daemon"
-attribute :persist_interval, :kind_of => Integer, :default => 1000
+attribute :name, kind_of: String, name_attribute: true
+attribute :priority, kind_of: Integer, default: 20
+attribute :filename, kind_of: String, default: nil
+attribute :severity, kind_of: String, default: 'Info'
+attribute :facility, kind_of: String, default: 'daemon'
+attribute :persist_interval, kind_of: Integer, default: 1000
