@@ -28,7 +28,7 @@ Installs and configures rsyslog. Provides LWRP for creating rules.
 
 # Recipes
 
-* rssylog::default - Installs and configures rsyslog
+* rsyslog::default - Installs and configures rsyslog
 
 # LWRP
 
