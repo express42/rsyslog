@@ -45,6 +45,12 @@ describe file('/etc/rsyslog.d/20-apt.conf') do
   it { should be_file }
 end
 
+# gelf template
 describe file('/etc/rsyslog.d/10-gelf.conf') do
+  it { should be_file }
+end
+
+# gelf action
+describe file('/etc/rsyslog.d/30-gelf_output.conf') do
   it { should be_file }
 end

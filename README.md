@@ -202,6 +202,26 @@ rsyslog_template 'gelf' do
 end
 ```
 
+## Using action
+Create actions for sending output data to graylog server using GELF protocol
+
+```
+rsyslog_action 'gelf_output' do
+  type 'omfwd'
+  rule 'target="graylog.example.org" port="12201" protocol="udp" template="gelf"'
+end
+```
+
+Sends data go kafka first, insted logging server
+
+```
+rsyslog_action 'kafka_output' do
+  type 'omkafka'
+  rule 'broker=['kafka01.exampler.org:9092', 'kafka02.exampler.org:9092'] topic="logger" confParam=["compression.codec=snappy"]'
+end
+
+```
+
 See fixture cookbook in `tests/fixtures/cookbooks`.
 
 
