@@ -1,12 +1,12 @@
 # Description
 
-Installs and configures rsyslog. Provides LWRP for creating rules.
+Installs and configures rsyslog v6 and v7+. Provides LWRP for creating rules.
 
 # Requirements
+Rsyslog native package or latest rsyslog stable package from official repository.
 
 ## Platform:
-
-* Ubuntu
+* Ubuntu 14.04
 
 # Attributes
 
@@ -29,6 +29,11 @@ Installs and configures rsyslog. Provides LWRP for creating rules.
 # Recipes
 
 * rsyslog::default - Installs and configures rsyslog.
+
+# Resources
+* [rsyslog_rule](#rsyslog_rule)
+* [rsyslog_rule_input](#rsyslog_rule_input)
+* [rsyslog_template](#rsyslog_template)
 
 # LWRP
 
@@ -114,6 +119,34 @@ Create rules for getting arbitrary log files into rsyslg
 </tr>
 </table>
 
+### `template`
+Create template to specify the log format 
+### Parameters
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+<th>Required?</th>
+<th>Default</th>
+</tr>
+<tr>
+<td>type</td>
+<td>Type of template, list or string is available.</td>
+<td><tt>"list"</tt></td>
+<td>Y</td>
+<td>string</td>
+</tr>
+<tr>
+<td>statement</td>
+<td>statement defined to created template</td>
+<td><tt>"/var/log/system-%HOSTNAME%.log"</tt></td>
+<td>Y</td>
+<td>nil</td>
+</tr>
+</table>
+
+
 
 # Usage
 
@@ -147,6 +180,25 @@ rsyslog_rule_input "unicorn-rails" do
   priority 15
   filename "/home/rocketbank/rocketbank/current/log/production.log"
   severity "error"
+end
+```
+
+## Using template
+Create template for GELF ouput using in rules (need lots of escaping currently)
+
+```
+rsyslog_template 'gelf' do
+  type 'list'
+  statement 'constant(value="{\"version\":\"1.1\",")
+  constant(value="\"host\":\"")
+  property(name="hostname")
+  constant(value="\",\"short_message\":\"")
+  property(name="msg" format="json")
+  constant(value="\",\"timestamp\":\"")
+  property(name="timegenerated" dateformat="unixtimestamp")
+  constant(value="\",\"level\":\"")
+  property(name="syslogseverity")
+  constant(value="\"}")'
 end
 ```
 
