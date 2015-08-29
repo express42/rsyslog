@@ -44,3 +44,7 @@ end
 describe file('/etc/rsyslog.d/20-apt.conf') do
   it { should be_file }
 end
+
+describe file('/etc/rsyslog.d/10-gelf.conf') do
+  it { should be_file }
+end
