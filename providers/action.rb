@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rsyslog
-# Provider:: template
+# Provider:: action
 #
 # Author:: LLC Express 42 (info@express42.com)
 #
