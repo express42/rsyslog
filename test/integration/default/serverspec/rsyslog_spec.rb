@@ -54,3 +54,8 @@ end
 describe file('/etc/rsyslog.d/30-gelf_output.conf') do
   it { should be_file }
 end
+
+# property_based_filter
+describe file('/etc/rsyslog.d/20-cron_exceptions.conf') do
+  it { should be_file }
+end

@@ -27,3 +27,11 @@ rsyslog_action 'gelf_output' do
   type 'omfwd'
   rule 'target="192.168.200.2" port="12201" protocol="udp" template="gelf"'
 end
+
+# Property based filter
+rsyslog_property_based_filter 'cron_exceptions' do
+  property ':msg'
+  operator 'regex'
+  match_string '\[YII\].*'
+  log_file '-/var/log/cron_exceptions'
+end

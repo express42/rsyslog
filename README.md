@@ -133,9 +133,9 @@ Create template to specify the log format
 <tr>
 <td>type</td>
 <td>Type of template, list or string is available.</td>
-<td><tt>"list"</tt></td>
+<td><tt>'list'</tt></td>
 <td>Y</td>
-<td>string</td>
+<td>nil</td>
 </tr>
 <tr>
 <td>statement</td>
@@ -146,7 +146,81 @@ Create template to specify the log format
 </tr>
 </table>
 
+### `action`
+Create action to send logs using output modules
+### Parameters
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+<th>Required?</th>
+<th>Default</th>
+</tr>
+<tr>
+<td>type</td>
+<td>Type of action.</td>
+<td><tt>'omfwd'</tt></td>
+<td>Y</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>rule</td>
+<td>Rule for used action</td>
+<td><tt>'target="graylog.example.org" port="12201" protocol="udp" template="gelf"'</tt></td>
+<td>Y</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Priority for created action configuration file</td>
+<td><tt>30</tt></td>
+<td>N</td>
+<td>nil</td>
+</tr>
+</table>
 
+### `propery_based_filter`
+Create filter using property based filter instead BSD style with facility and severity
+### Parameters
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+<th>Required?</th>
+<th>Default</th>
+</tr>
+<tr>
+<td>property</td>
+<td>Rsyslog property, see list of all properties on official documentation site. http://www.rsyslog.com/doc/v8-stable/configuration/properties.html</td>
+<td><tt>':fromhost'</tt></td>
+<td>Y</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>compare-operations or regex</td>
+<td><tt>'contains'</tt></td>
+<td>Y</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>match_string</td>
+<td>Matched string in used operator</td>
+<td><tt>'firewall: IN='</tt></td>
+<td>Е</td>
+<td>nil</td>
+</tr>
+</table>
+<tr>
+<td>log_file</td>
+<td>Resulted log file</td>
+<td><tt>'/var/log/firewall'</tt></td>
+<td>Е</td>
+<td>nil</td>
+</tr>
+</table>
 
 # Usage
 
@@ -220,6 +294,18 @@ rsyslog_action 'kafka_output' do
   rule 'broker=['kafka01.exampler.org:9092', 'kafka02.exampler.org:9092'] topic="logger" confParam=["compression.codec=snappy"]'
 end
 
+```
+
+## Using propery_based_filter
+Create propery matching all logs stated with [YII] in syslog and organizing it in separate cron_exceptions logfile
+
+```
+rsyslog_property_based_filter 'cron_exceptions' do
+  property ':msg'
+  operator 'regex'
+  match_string '\[YII\].*'
+  log_file '-/var/log/cron_exceptions'
+end
 ```
 
 See fixture cookbook in `tests/fixtures/cookbooks`.
