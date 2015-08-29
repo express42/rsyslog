@@ -26,7 +26,7 @@
 #
 
 apt_repository 'rsyslog-repo' do
-  uri 'ppa:adiscon/v8-stable '
+  uri 'ppa:adiscon/v8-stable'
   distribution node['lsb']['codename']
   components ['main']
   key 'AEF0CF8E'
