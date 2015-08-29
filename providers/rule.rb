@@ -26,7 +26,6 @@
 #
 
 action :rule do
-
   rule_name = new_resource.name
   priority = new_resource.priority
   selector = new_resource.selector

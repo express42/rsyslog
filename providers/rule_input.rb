@@ -26,7 +26,6 @@
 #
 
 action :rule_input do
-
   rule_name = new_resource.name
   priority = new_resource.priority
   filename = new_resource.filename
