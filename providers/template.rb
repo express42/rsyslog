@@ -25,6 +25,8 @@
 # SOFTWARE.
 #
 
+use_inline_resources
+
 action :create do
   template_name = new_resource.name
   template_type = new_resource.type

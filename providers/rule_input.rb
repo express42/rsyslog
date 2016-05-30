@@ -25,6 +25,8 @@
 # SOFTWARE.
 #
 
+use_inline_resources
+
 action :rule_input do
   rule_name = new_resource.name
   priority = new_resource.priority
