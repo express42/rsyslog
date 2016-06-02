@@ -25,6 +25,8 @@
 # SOFTWARE.
 #
 
+use_inline_resources
+
 action :create do
   action_name = new_resource.name
   action_type = new_resource.type
