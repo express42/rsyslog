@@ -25,7 +25,8 @@
 #
 
 package 'rsyslog' do
-  action :upgrade
+  action :install
+  version "#{node['rsyslog']['version']}\*"
   options "-o Dpkg::Options::='--force-confold'"
 end
 
