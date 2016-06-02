@@ -1,15 +1,19 @@
 # Description
 
-Installs and configures rsyslog v6 and v7+. Provides LWRP for creating rules.
+Installs and configures rsyslog v7 and v8. Provides LWRP for creating rules.
 
 # Requirements
+
 Rsyslog native package or latest rsyslog stable package from official repository.
 
 ## Platform:
+
+* Ubuntu 12.04
 * Ubuntu 14.04
 
 # Attributes
 
+* `node['rsyslog']['version']` - Defaults to `7`
 * `node['rsyslog']['modules']['default_modules']` -  Defaults to `"%w(imuxsock imklog)"`.
 * `node['rsyslog']['modules']['extra_modules']` -  Defaults to `"[ ... ]"`.
 * `node['rsyslog']['preservefqdn']` -  Defaults to `"off"`.
@@ -29,6 +33,7 @@ Rsyslog native package or latest rsyslog stable package from official repository
 # Recipes
 
 * rsyslog::default - Installs and configures rsyslog.
+* rsyslog::apt_official_repo - Configures rsyslog official repository.
 
 # Resources
 * [rsyslog_rule](#rsyslog_rule)
@@ -224,7 +229,8 @@ Create filter using property based filter instead BSD style with facility and se
 
 # Usage
 
-Include `recipe[rsyslog]` in node runlist
+* Include `recipe[rsyslog]` in node runlist
+* Include `recipe[rsyslog::apt_official_repo]` if you need install fresh versions from official repository
 
 ## Using rsyslog_rule
 If you want to log all message from mail facility:
@@ -286,7 +292,7 @@ rsyslog_action 'gelf_output' do
 end
 ```
 
-Sends data go kafka first, insted logging server
+Sends data go kafka first, instead logging server
 
 ```
 rsyslog_action 'kafka_output' do
@@ -308,7 +314,7 @@ rsyslog_property_based_filter 'cron_exceptions' do
 end
 ```
 
-See fixture cookbook in `tests/fixtures/cookbooks`.
+See fixture cookbooks in `tests/fixtures/cookbooks`.
 
 
 # License and Maintainer

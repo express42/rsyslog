@@ -1,7 +1,7 @@
 # Cookbook Name:: rsyslog
 # Attributes:: default
 
-# Version and updates
+# Major version
 default['rsyslog']['version'] = '7'
 
 # Modules

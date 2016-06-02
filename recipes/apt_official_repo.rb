@@ -1,10 +1,10 @@
 #
-# Cookbook Name:: postgresql_lwrp
+# Cookbook Name:: rsyslog
 # Recipe:: apt_official_repository
 #
 # Author:: LLC Express 42 (info@express42.com)
 #
-# Copyright (C) 2015 LLC Express 42
+# Copyright (C) 2016 LLC Express 42
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
