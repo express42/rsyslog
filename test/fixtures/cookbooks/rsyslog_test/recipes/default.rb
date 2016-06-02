@@ -1,4 +1,5 @@
 include_recipe 'apt'
+include_recipe 'rsyslog::apt_official_repo'
 include_recipe 'rsyslog'
 
 # rule_input lwrp

@@ -24,7 +24,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-package 'rsyslog'
+package 'rsyslog' do
+  action :upgrade
+  options "-o Dpkg::Options::='--force-confold'"
+end
 
 service 'rsyslog' do
   case node['platform']
