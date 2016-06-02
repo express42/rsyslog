@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
+use_inline_resources
 
 action :create do
   rule_name = new_resource.name
@@ -43,8 +44,10 @@ action :create do
       operator: operator,
       match_string: match_string,
       log_file: log_file
-      )
+    )
     cookbook 'rsyslog'
     notifies :restart, 'service[rsyslog]', :delayed
   end
+
+  new_resource.updated_by_last_action(true)
 end

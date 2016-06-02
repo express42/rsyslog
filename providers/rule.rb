@@ -24,9 +24,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
+use_inline_resources
 
 action :rule do
-
   rule_name = new_resource.name
   priority = new_resource.priority
   selector = new_resource.selector
