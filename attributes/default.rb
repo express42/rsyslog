@@ -1,6 +1,9 @@
 # Cookbook Name:: rsyslog
 # Attributes:: default
 
+# Major version
+default['rsyslog']['version'] = '7'
+
 # Modules
 default['rsyslog']['modules']['default_modules'] = %w(imuxsock imklog)
 default['rsyslog']['modules']['extra_modules'] = []
