@@ -15,7 +15,12 @@ platforms:
       box: express42/ubuntu-14.04
 
 suites:
-  - name: default
+  - name: distro
     run_list:
-      - recipe[rsyslog_test]
-    attributes:
+      - recipe[rsyslog_test::distro]
+  - name: v7
+    run_list:
+      - recipe[rsyslog_test::v7]  
+  - name: v8
+    run_list:
+      - recipe[rsyslog_test::v8]
