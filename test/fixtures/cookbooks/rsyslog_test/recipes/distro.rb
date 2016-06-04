@@ -4,6 +4,8 @@ case node['platform']
 when 'ubuntu'
   if node['platform_version'].to_f == 12.04
     node.default['rsyslog']['version'] = '5'
+  elsif node['platform_version'].to_f == 16.04
+    node.default['rsyslog']['version'] = '8'
   end
 end
 

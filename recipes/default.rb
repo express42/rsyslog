@@ -31,12 +31,6 @@ package 'rsyslog' do
 end
 
 service 'rsyslog' do
-  case node['platform']
-  when 'ubuntu'
-    if node['platform_version'].to_f >= 14.04
-      provider Chef::Provider::Service::Upstart
-    end
-  end
   supports restart: true
   action [:enable, :start]
 end
