@@ -10,10 +10,11 @@ Rsyslog native package or latest rsyslog stable package from official repository
 
 * Ubuntu 12.04
 * Ubuntu 14.04
+* Ubuntu 16.04
 
 # Attributes
 
-* `node['rsyslog']['version']` - Defaults to `7`
+* `node['rsyslog']['version']` - Major Rsyslog version. Defaults to `7`
 * `node['rsyslog']['modules']['default_modules']` -  Defaults to `"%w(imuxsock imklog)"`.
 * `node['rsyslog']['modules']['extra_modules']` -  Defaults to `"[ ... ]"`.
 * `node['rsyslog']['preservefqdn']` -  Defaults to `"off"`.
