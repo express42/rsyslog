@@ -1,10 +1,10 @@
 #
 # Cookbook Name:: rsyslog
-# Provider:: rule
+# Recipe:: apt_official_repository
 #
 # Author:: LLC Express 42 (info@express42.com)
 #
-# Copyright (C) LLC 2012 Express 42
+# Copyright (C) 2016 LLC Express 42
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -25,26 +25,10 @@
 # SOFTWARE.
 #
 
-use_inline_resources
-
-action :rule do
-  rule_name = new_resource.name
-  priority = new_resource.priority
-  selector = new_resource.selector
-  log_action = new_resource.log_action
-
-  template "/etc/rsyslog.d/#{priority}-#{rule_name}.conf" do
-    source 'rule.conf.erb'
-    owner 'root'
-    group 'root'
-    mode '0644'
-    variables(
-      selector: selector,
-      log_action: log_action
-    )
-    cookbook 'rsyslog'
-    notifies :restart, 'service[rsyslog]', :delayed
-  end
-
-  new_resource.updated_by_last_action(true)
+apt_repository 'rsyslog-repo' do
+  uri "ppa:adiscon/v#{node['rsyslog']['version']}-stable"
+  distribution node['lsb']['codename']
+  components ['main']
+  key 'AEF0CF8E'
+  keyserver 'keyserver.ubuntu.com'
 end

@@ -1,10 +1,10 @@
 #
 # Cookbook Name:: rsyslog
-# Provider:: rule
+# Provider:: property_based_filter
 #
 # Author:: LLC Express 42 (info@express42.com)
 #
-# Copyright (C) LLC 2012 Express 42
+# Copyright (C) LLC 2015 Express 42
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -27,20 +27,24 @@
 
 use_inline_resources
 
-action :rule do
+action :create do
   rule_name = new_resource.name
+  property = new_resource.property
+  operator = new_resource.operator
+  match_string = new_resource.match_string
+  log_file = new_resource.log_file
   priority = new_resource.priority
-  selector = new_resource.selector
-  log_action = new_resource.log_action
 
   template "/etc/rsyslog.d/#{priority}-#{rule_name}.conf" do
-    source 'rule.conf.erb'
+    source 'filters/property_based_filter.conf.erb'
     owner 'root'
     group 'root'
     mode '0644'
     variables(
-      selector: selector,
-      log_action: log_action
+      property: property,
+      operator: operator,
+      match_string: match_string,
+      log_file: log_file
     )
     cookbook 'rsyslog'
     notifies :restart, 'service[rsyslog]', :delayed

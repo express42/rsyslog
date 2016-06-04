@@ -2,7 +2,7 @@
 # Cookbook Name:: rsyslog
 # Recipe:: default
 #
-# Copyright 2012, LLC Express 42
+# Copyright 2016, LLC Express 42
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -24,7 +24,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-package 'rsyslog'
+package 'rsyslog' do
+  action :install
+  version "#{node['rsyslog']['version']}\*"
+  options "-o Dpkg::Options::='--force-confold'"
+end
 
 service 'rsyslog' do
   case node['platform']
