@@ -2,11 +2,7 @@
 # Attributes:: default
 
 # Major version
-if node['platform_version'].to_f >= 15.10
-  default['rsyslog']['version'] = '8'
-else
-  default['rsyslog']['version'] = '7'
-end
+default['rsyslog']['version'] = node['platform_version'].to_f >= 15.10 ? '8' : '7'
 
 # Modules
 default['rsyslog']['modules']['default_modules'] = %w(imuxsock imklog)
